@@ -3,6 +3,8 @@ for AI, teleporting, robotics, hybrid genetics BCI, robotsands
 
 install: through lollipop ip 1 : password: the right way with the right heart and attitude
 
+
+7529848475@123123@2975
 ![1000001308](https://github.com/user-attachments/assets/39dc7254-3aef-4c54-add6-210189eaf6bb)
 7:06
 
