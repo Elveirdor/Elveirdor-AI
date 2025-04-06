@@ -1,0 +1,1 @@
+SHA2-256(patent_document.txt)= beb54733411282f0b7a8bb574baf6035a7d5699e442aecb6ce4da267e2501e31
