@@ -222,3 +222,38 @@ https://github.com/user-attachments/assets/b9baf640-0d20-4df3-9172-d48a141b1e0e
 ![1000001196](https://github.com/user-attachments/assets/e31cae08-716e-438c-b296-bc9e4b5aa45e)
 ![1000001344](https://github.com/user-attachments/assets/3b12e6f9-1a48-472a-a6f7-c4c727885293)
 ![1000001376](https://github.com/user-attachments/assets/6ced5cb5-60a8-443d-acbd-fd51c80ce108)
+
+# Git Push Commands
+
+This repository uses the following `git push` commands:
+
+## Options
+* `-v`, `--[no-]verbose`: Be more verbose
+* `-q`, `--[no-]quiet`: Be more quiet
+* `--[no-]repo <repository>`: Repository
+* `--[no-]all`: Push all branches
+* `--[no-]branches`: Alias of `--all`
+* `--[no-]mirror`: Mirror all refs
+* `-d`, `--[no-]delete`: Delete refs
+* `--[no-]tags`: Push tags (can't be used with `--all` or `--branches` or `--mirror`)
+* `-n`, `--[no-]dry-run`: Dry run
+* `--[no-]porcelain`: Machine-readable output
+* `-f`, `--[no-]force`: Force updates
+* `--[no-]force-with-lease[=<refname>:<expect>]`: Require old value of ref to be at this value
+* `--[no-]force-if-includes`: Require remote updates to be integrated locally
+* `--[no-]recurse-submodules`: Control recursive pushing of submodules
+* `--[no-]thin`: Use thin pack
+* `--[no-]receive-pack <receive-pack>`: Receive pack program
+* `--[no-]exec <receive-pack>`: Receive pack program
+* `-u`, `--[no-]set-upstream`: Set upstream for git pull/status
+* `--[no-]progress`: Force progress reporting
+* `--[no-]prune`: Prune locally removed refs
+* `--no-verify`: Bypass pre-push hook
+* `--verify`: Opposite of `--no-verify`
+* `--[no-]follow-tags`: Push missing but relevant tags
+* `--[no-]signed[=(yes|no|if-asked)]`: GPG sign the push
+* `--[no-]atomic`: Request atomic transaction on remote side
+* `-o`, `--[no-]push-option <server-specific>`: Option to transmit
+* `-4`, `--ipv4`: Use IPv4 addresses only
+* `-6`, `--ipv6`: Use IPv6 addresses only
+
