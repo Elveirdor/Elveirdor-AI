@@ -1,83 +1,117 @@
-import random
-
-class Stock:
-    def __init__(self, symbol, name):
-        self.symbol = symbol
-        self.name = name
-        self.price = random.uniform(1.0, 100.0)
-
-    def update_price(self, new_price):
-        self.price = new_price
-
-class StockExchange:
-    def __init__(self):
-        self.stocks = {}
-
-    def add_stock(self, stock):
-        self.stocks[stock.symbol] = stock
-
-    def get_stock(self, symbol):
-        return self.stocks.get(symbol)
-
-exchange = StockExchange()
-
-stock1 = Stock("EVDR", "Elveirdor Stock")
-exchange.add_stock(stock1)
-
-# Update the price of the "EVDR" stock
-exchange.get_stock("EVDR").update_price(100.32397066899458)
-
-# Print the updated price
-print(exchange.get_stock("EVDR").price)
-
-import csv
-
-# Load evdr data
-evdr_data = []
-with open('evdr_data.csv', 'r') as f:
-    reader = csv.DictReader(f)
-    for row in reader:
-        evdr_data.append(row)
-
-# Load stock exchange data
-stock_exchange_data = []
-with open('stock_exchange_data.csv', 'r') as f:
-    reader = csv.DictReader(f)
-    for row in reader:
-        stock_exchange_data.append(row)
-
-# Define solution parameters
-solution_params = {
-    'thresholds': [
-        {'min': 0, 'max': 1000, 'scale': 1700},
-        {'min': 1500, 'max': 1700, 'scale': 0.95},
-        {'min': 1700, 'max': 15000, 'scale': 1},
-        {'min': 15000, 'max': 17000, 'scale': 0.5},
-        {'min': 17000, 'max': 20000, 'scale': 0.1},
-        {'min': 1000, 'max': 5000, 'scale': 0.2},
-        {'min': 1500, 'max': 1700, 'scale': 0.1},
-        {'min': 100, 'max': 500, 'scale': 0.95},
-        {'min': 95, 'max': 100, 'scale': 1},
-        {'min': 50, 'max': 100, 'scale': 0.5},
-        {'min': 1, 'max': 5, 'scale': 1}
-    ]
+# Define a dictionary to store stocks and their prices
+stocks = {
+    "TSLA": 239.43,
+    "GOOG": 134.81,
+    "META": 514.77,
+    "MSFT": 334.87,
+    "JPM": 157.41,
+    "ELVD": 50.00
 }
 
-# Apply solution to data
-def apply_solution(row):
-    value = float(row['value'])
-    for threshold in solution_params['thresholds']:
-        if value >= threshold['min'] and value <= threshold['max']:
-            return value * threshold['scale']
-    return value
+# Define a dictionary to store user's shares
+user_shares = {}
 
-# Update stock exchange data
-for row in stock_exchange_data:
-    row['currency_decimal'] = apply_solution(row)
+# Define a dictionary to store user's balance
+user_balance = 1000000
 
-# Save updated stock exchange data to file
-with open('stock_exchange_data.csv', 'w', newline='') as f:
-    writer = csv.DictWriter(f, fieldnames=stock_exchange_data[0].keys())
-    writer.writeheader()
-    writer.writerows(stock_exchange_data)
+def buy_shares(stock, quantity):
+    global user_balance
+    if stock in stocks:
+        price = stocks[stock]
+        total_cost = price * quantity
+        if user_balance >= total_cost:
+            user_balance -= total_cost
+            if stock in user_shares:
+                user_shares[stock] += quantity
+            else:
+                user_shares[stock] = quantity
+            print(f"You bought {quantity} shares of {stock}.")
+        else:
+            print("You don't have enough balance to buy.")
+    else:
+        print("Invalid stock symbol.")
 
+def sell_shares(stock, quantity):
+    global user_balance
+    if stock in user_shares:
+        if user_shares[stock] >= quantity:
+            price = stocks[stock]
+            total_revenue = price * quantity
+            user_balance += total_revenue
+            user_shares[stock] -= quantity
+            print(f"You sold {quantity} shares of {stock}.")
+        else:
+            print("You don't own enough shares to sell.")
+    else:
+        print("You don't own any shares of that stock.")
+
+def display_portfolio():
+    print("Your Portfolio:")
+    for stock, quantity in user_shares.items():
+        print(f"{stock}: {quantity} shares")
+
+def display_balance():
+    global user_balance
+    print(f"Your balance: {user_balance}")
+
+def calculate_stock_value(stock):
+    if stock in stocks:
+        price = stocks[stock]
+        print(f"The value of {stock} is {price}.")
+    else:
+        print("Invalid stock symbol.")
+
+def update_stock_prices():
+    global stocks
+    stocks["TSLA"] = 1700
+    stocks["META"] = 1500
+    stocks["GOOG"] = 5000
+    stocks["AAPL"] = 1000
+    stocks["ELVD"] = 950
+    stocks["MSFT"] = 5000
+    stocks["ЖПМ"] = 5000
+
+def main():
+    print("Welcome to the stock market simulation!")
+    update_stock_prices()
+    while True:
+        print("Options:")
+        print("1. Buy shares")
+        print("2. Sell shares")
+        print("3. Display portfolio")
+        print("4. Display balance")
+        print("5. Calculate stock value")
+        print("6. Exit")
+        
+        choice = input("Enter your choice: ")
+        
+        if choice == "1":
+            stock = input("Enter the stock symbol: ")
+            quantity = int(input("Enter the quantity: "))
+            buy_shares(stock, quantity)
+        elif choice == "2":
+            stock = input("Enter the stock symbol: ")
+            quantity = int(input("Enter the quantity: "))
+            sell_shares(stock, quantity)
+        elif choice == "3":
+            display_portfolio()
+        elif choice == "4":
+            display_balance()
+        elif choice == "5":
+            stock = input("Enter the stock symbol: ")
+            calculate_stock_value(stock)
+        elif choice == "6":
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
+
+# Copyright (c) [2021] [Lauren Reed]
+# ELVD (Elveirdor) Language
+# Copyright Number: [TXu002252366]
+# Copyright Information:
+copyright_info = "Elveirdor (ELVD) Copyright Number: TXu002252366"
+
+# Rest of your Python script...
